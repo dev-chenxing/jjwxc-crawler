@@ -13,7 +13,7 @@
 
 <p align="center">
     <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
-		<img alt="creator: chenxing" src="https://img.shields.io/badge/creator-陈刑-689e75">
+    <img alt="creator: chenxing" src="https://img.shields.io/badge/creator-陈刑-689e75">
     <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
     <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-scrape?color=7fbc87">
 </p>
@@ -38,7 +38,7 @@
 
 图形界面使用[PyQt-Fluent-Widgets](https://pyqt-fluent-widgets.readthedocs.io/en/latest/index.html)界面编写。
 
-[Release]()页面发布了已经打包好的 exe 可执行程序，包括图形化版本和命令行版本。
+[Releases]()页面发布了已经打包好的 exe 可执行程序，包括图形化版本和命令行版本。
 
 界面样例：
 
@@ -63,14 +63,15 @@
 pip install -r requirements.txt -i https://pypi.org/simple/
 ```
 
-### 使用图形界面运行:
-
-```
-python bilinovel_gui.py
-```
-
 ### 使用命令行模式运行:
 
 ```
-python bilinovel.py
+python main.py
 ```
+
+### 使用图形界面运行:
+
+```
+python main_gui.py
+```
+
