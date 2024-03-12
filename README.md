@@ -1,30 +1,26 @@
-<!--div align="center">
-  <img src="assets/logo.png" width="256"/>
-</!--div-->
-
 <a href="https://www.jjwxc.net//"><img align="right" src="assets/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
 
 <div>
   <h1 align="center">
-  《重生之我在绿江爪爪巴》
-</h1>
-<p align="center">
-  一键下载
-  <a href="https://www.jjwxc.net">晋江文学城 (https://www.jjwxc.net)</a> 
-  网站小说非 V 章节
-</p>
-<p align="center">
-    <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
-    <img alt="creator: chenxing" src="https://img.shields.io/badge/creator-陈刑-689e75">
-    <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
-    <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-scrape?color=7fbc87">
-</p>
+    《重生之我在绿江爪爪巴》
+  </h1>
+  <p align="center">
+    一键下载
+    <a href="https://www.jjwxc.net">晋江文学城 (https://www.jjwxc.net)</a> 
+    网站小说非 V 章节
+  </p>
+  <p align="center">
+      <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
+      <a href="https://www.github.com/labuladong" target="_blank"><img src="https://img.shields.io/badge/作者-@陈刑-689e75.svg?logo=GitHub"></a>
+      <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
+      <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-crawler?color=7fbc87">
+  </p>
 </div>
 
 <h4 align="center">
     <p>
         <b>简体中文</b> |
-        <a href="https://github.com/amaliegay/jjwxc-scrape/blob/main/README_en.md">English</a>
+        <a href="https://github.com/amaliegay/jjwxc-crawler/blob/main/README_en.md">English</a>
     </p>
 </h4>
 
@@ -74,16 +70,16 @@ pip install -r requirements.txt -i https://pypi.org/simple/
 
 ```powershell
 # 启动程序
-jjscrape
+jjcrawler
 
 # 下载书号为8508851的小说的所有非V章节到D:/some/random/directory文件夹
-jjscrape -o D:/some/random/directory 8508851
+jjcrawler -o D:/some/random/directory 8508851
 ```
 
 ### 使用图形界面运行
 
 ```
-jjscrape_gui
+jjcrawler
 ```
 
 **[⬆ 回到顶部](#特点功能)**
