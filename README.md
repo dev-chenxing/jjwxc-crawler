@@ -69,17 +69,20 @@ pip install -r requirements.txt -i https://pypi.org/simple/
 ### 使用命令行模式运行
 
 ```powershell
-# 启动程序
-jjcrawler
+# 启动命令行小程序
+.\jjcrawler
 
-# 下载书号为8508851的小说的所有非V章节到D:/some/random/directory文件夹
-jjcrawler -o D:/some/random/directory 8508851
+# 下载书号为8508851的小说的所有非V章节到默认文件夹.\novels
+.\jjcrawler 8508851
+
+# 下载书号为8508851的小说的所有非V章节到D:\some\random\directory文件夹
+.\jjcrawler -o D:\some\random\directory 8508851
 ```
 
 ### 使用图形界面运行
 
 ```
-jjcrawler
+.\jjcrawler-gui
 ```
 
 **[⬆ 回到顶部](#特点功能)**

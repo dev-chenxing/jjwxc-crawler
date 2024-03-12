@@ -67,17 +67,18 @@ pip install -r requirements.txt -i https://pypi.org/simple/
 ### Run the Console App
 
 ```powershell
-# Launch the app
-jjcrawler
+# Launch the CLI app
+.\jjcrawler
 
-# Download all non-V chapters of the novel with the id 8508851 in the directory D:/some/random/directory
-jjcrawler -o D:/some/random/directory 8508851 
+# Download all non-V chapters of the novel with the id 8508851 in the default directory .\novels
+.\jjcrawler 8508851
+
+# Download all non-V chapters of the novel with the id 8508851 in the directory D:\some\random\directory
+.\jjcrawler -o D:\some\random\directory 8508851
 ```
-
 
 ### Run the GUI
 
 ```
-jjcrawler-gui
+.\jjcrawler-gui
 ```
-

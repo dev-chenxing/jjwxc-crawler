@@ -88,12 +88,28 @@ def left_indent(line):
     return "\u3000\u3000" + line
 
 
+def get_file_name(chapter):
+    if chapter["id"] != None:
+        file_name = f"第{chapter['id']}章-{chapter['title']}"
+    else:
+        file_name = chapter["title"]
+    return file_name
+
+
+def get_heading(chapter):
+    if chapter["id"] != None:
+        heading = f"第{chapter['id']}章 {chapter['title']}"
+    else:
+        heading = chapter["title"]
+    return heading
+
+
 def create_chapter_doc(directory, chapter):
     chapter_doc = Document()
-    file_name = f"第{chapter['id']}章-{chapter['title']}"
+    file_name = get_file_name(chapter)
     set_doc_style(chapter_doc)
 
-    heading = f"第{chapter['id']}章 {chapter['title']}"
+    heading = get_heading(chapter)
     heading_paragraph = chapter_doc.add_paragraph(heading)
     heading_paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
@@ -102,11 +118,12 @@ def create_chapter_doc(directory, chapter):
     for paragraph in format_body(chapter["body"]):
         chapter_doc.add_paragraph(paragraph)
 
-    chapter_doc.add_paragraph()
-
-    for paragraph in process_desc(chapter["author_said"]):
-        author_said_paragraph = chapter_doc.add_paragraph(paragraph)
-        author_said_paragraph.runs[0].font.color.rgb = RGBColor(0x00, 0x99, 0x00)
+    author_said = process_desc(chapter["author_said"])
+    if author_said:
+        chapter_doc.add_paragraph()
+        for paragraph in author_said:
+            author_said_paragraph = chapter_doc.add_paragraph(paragraph)
+            author_said_paragraph.runs[0].font.color.rgb = RGBColor(0x00, 0x99, 0x00)
 
     output_path = f"{directory}{file_name}.docx"
     chapter_doc.save(output_path)
