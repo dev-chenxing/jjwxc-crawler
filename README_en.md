@@ -1,6 +1,4 @@
-<div align="center">
-  <img src="assets/logo.png" width="256"/> 
-</div>
+<a href="https://www.jjwxc.net//"><img align="right" src="assets/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
 
 <h1 align="center">
    Scraping Books from the 晋江文学城 Website
@@ -14,12 +12,12 @@
     <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
 		<img alt="creator: chenxing" src="https://img.shields.io/badge/creator-陈刑-689e75">
     <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
-    <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-scrape?color=7fbc87">
+    <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-crawler?color=7fbc87">
 </p>
 
 <h4 align="center">
     <p>
-        <a href="https://github.com/amaliegay/jjwxc-scrape">简体中文</a> |
+        <a href="https://github.com/amaliegay/jjwxc-crawler">简体中文</a> |
         <b>English</b>
     </p>
 </h4>
@@ -46,32 +44,40 @@ Preview:
   <img src="post/example2.png" width="400"/-->
 </div>
 
-# Usage and Options
+# Install and Usage
 
 ## Method 1: Run the .exe
 
 A portable executable is available in [Releases](), which has both the graphical user interface and the console app.
 
-Simply run the scrape-jjwxc.exe and you are good to go!
+Simply run the jjcrawler.exe and you are good to go!
 
-## Method 2: Run the python scripts
+## Method 2: Run the python scripts (Recommanded)
 
 ### Install Requirements
+
+```
+Python 3.8
+```
 
 ```
 pip install -r requirements.txt -i https://pypi.org/simple/
 ```
 
-### Run the console app:
+### Run the Console App
+
+```powershell
+# Launch the app
+jjcrawler
+
+# Download all non-V chapters of the novel with the id 8508851 in the directory D:/some/random/directory
+jjcrawler -o D:/some/random/directory 8508851 
+```
+
+
+### Run the GUI
 
 ```
-python main.py
-```
-
-
-### Run the GUI:
-
-```
-python main_gui.py
+jjcrawler-gui
 ```
 
