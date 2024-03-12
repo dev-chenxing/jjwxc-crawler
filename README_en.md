@@ -26,7 +26,7 @@ Features:
 
 -   Fluent GUI, with download progress bar and book cover display.
 -   Customize download directory.
--   With Terminal User Interface.
+-   With user-friendly CLI interface.
 -   Output in .docx format.
 -   Supports multiple books download at the same time.
 -   ...................
