@@ -1,4 +1,4 @@
-from urllib.request import urlretrieve
+import requests
 import re
 import os
 
@@ -27,18 +27,20 @@ def process_desc(description):
     return desc
 
 
-def get_cover_path(url, directory, title):
-    file_extension = url.split(".")[-1]
-    if len(file_extension) > 5:
-        file_extension = "jpg"
-    return f"{directory}{title}.{file_extension}"
+def get_cover_path(directory, title):
+    file_extension = ".jpg"
+    return f"{directory}{title}{file_extension}"
 
 
 def download_cover(directory, novel):
     url = novel["cover_url"]
     if url:
-        cover_path = get_cover_path(url, directory, novel["title"])
-        urlretrieve(url, cover_path)
+        cover_path = get_cover_path(directory, novel["title"])
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(cover_path, "wb") as file:
+                for chunk in response:
+                    file.write(chunk)
 
 
 def get_chapter_id(url: str) -> str:
@@ -58,3 +60,24 @@ def make_directories(novel) -> str:
         os.mkdir(directory)
     print(directory)
     return directory
+
+
+def get_novel_title(response):
+    title = response.css("h1 span::text").get()
+    if title:
+        if "*" in title:
+            new_title = ""
+            asterisk = False
+            for i in range(len(title)):
+                if title[i] != "*":
+                    if asterisk == True:
+                        new_title += "[锁]"
+                        asterisk = False
+                    new_title += title[i]
+                else:
+                    if asterisk == False:
+                        asterisk = True
+            title = new_title
+        return title.strip()
+    else:
+        return

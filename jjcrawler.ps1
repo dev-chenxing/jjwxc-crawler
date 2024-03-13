@@ -1,4 +1,7 @@
-if (!$args[0]) { return }
+if (!$args[0]) { 
+    python .\jjcrawler\cli.py
+    return 
+}
     
 $NovelId = $args[0]
 

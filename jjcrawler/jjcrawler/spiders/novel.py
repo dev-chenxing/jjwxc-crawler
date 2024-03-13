@@ -1,15 +1,13 @@
 import scrapy
 
-from .utils import process_desc, download_cover, get_chapter_id, make_directories
+from .utils import (
+    process_desc,
+    download_cover,
+    get_novel_title,
+    get_chapter_id,
+    make_directories,
+)
 from .doc import create_desc_doc, create_chapter_doc
-
-
-def get_novel_title(response):
-    title = response.css("h1 span::text").get()
-    if title:
-        return title.strip()
-    else:
-        return
 
 
 class NovelSpider(scrapy.Spider):
@@ -29,8 +27,9 @@ class NovelSpider(scrapy.Spider):
             return
 
         self.directory = make_directories(novel)
-        create_desc_doc(self.directory, novel)
-        download_cover(self.directory, novel)
+        if novel["tag_list"] != None:
+            create_desc_doc(self.directory, novel)
+            download_cover(self.directory, novel)
 
         chapters = response.css("span div a")
         if chapters == []:
@@ -73,6 +72,8 @@ class NovelSpider(scrapy.Spider):
         chapter = {}
         chapter["id"] = get_chapter_id(response.url)
         chapter["title"] = response.css("div.novelbody div div h2::text").get()
+        if chapter["title"] == None:
+            return
         chapter["body"] = response.xpath(
             "//div[@class='novelbody']/div/node()"
         ).getall()
