@@ -5,25 +5,32 @@ import os
 from .config import default_directory
 
 
-def process_desc(description):
-    if description == []:
+def process_desc(desc_selector_list):
+    if desc_selector_list == []:
         return
-    desc = []
+    desc_list = []
     first_line_break = False
-    second_line_break = False
-    for line in description:
-        if line == "<br>":
-            if second_line_break == False:
-                if first_line_break == True:
-                    second_line_break = True
-                else:
-                    first_line_break = True
+    for selector in desc_selector_list:
+        children = selector.xpath("child::node()")
+        print(children)
+        if children != []:
+            desc_list += children.getall()
         else:
-            if second_line_break == True:
+            desc_list += selector.getall()
+    desc = []
+    for line in desc_list:
+        if line == "<br>":
+            if first_line_break == False:
+                first_line_break = True
+            else:
+                print("append empty line")
                 desc.append("")
+        elif line[:3] == "<hr":
+            continue
+        else:
+            print(f"append{line}")
             desc.append(line)
             first_line_break = False
-            second_line_break = False
     return desc
 
 

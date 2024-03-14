@@ -118,12 +118,15 @@ def create_chapter_doc(directory, chapter):
     for paragraph in format_body(chapter["body"]):
         chapter_doc.add_paragraph(paragraph)
 
-    author_said = process_desc(chapter["author_said"])
+    author_said = chapter["author_said"]
     if author_said:
         chapter_doc.add_paragraph()
-        for paragraph in author_said:
-            author_said_paragraph = chapter_doc.add_paragraph(paragraph)
-            author_said_paragraph.runs[0].font.color.rgb = RGBColor(0x00, 0x99, 0x00)
+        for author_said_p in author_said:
+            author_said_paragraph = chapter_doc.add_paragraph(author_said_p)
+            if author_said_paragraph.runs:
+                author_said_paragraph.runs[0].font.color.rgb = RGBColor(
+                    0x00, 0x99, 0x00
+                )
 
     output_path = f"{directory}{file_name}.docx"
     chapter_doc.save(output_path)

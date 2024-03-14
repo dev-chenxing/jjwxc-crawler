@@ -23,7 +23,7 @@ class NovelSpider(scrapy.Spider):
     def parse(self, response):
         novel = self.get_novel_item(response)
         if novel == None:
-            print("该文不存在或者已经删除")
+            print("该文已经删除或者全文存稿中")
             return
 
         self.directory = make_directories(novel)
@@ -59,9 +59,7 @@ class NovelSpider(scrapy.Spider):
                 novel["meaning"],
             ) = (None, None, None, None)
         else:
-            novel["desc"] = process_desc(
-                response.xpath('//*[@id="novelintro"]/node()').getall()
-            )
+            novel["desc"] = process_desc(response.xpath('//*[@id="novelintro"]/node()'))
             novel["tag_list"] = response.css("div.smallreadbody span a::text").getall()
             novel["keywords"] = response.css("span.bluetext::text").get()
             novel["oneliner"] = smallreadbody[2].get()
@@ -77,6 +75,6 @@ class NovelSpider(scrapy.Spider):
         chapter["body"] = response.xpath(
             "//div[@class='novelbody']/div/node()"
         ).getall()
-        chapter["author_said"] = response.css("div.readsmall::text").getall()
+        chapter["author_said"] = process_desc(response.css("div.readsmall"))
 
         create_chapter_doc(self.directory, chapter)
