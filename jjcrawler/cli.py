@@ -1,41 +1,30 @@
-from rich.console import Console
-from rich.progress import Progress, TextColumn, BarColumn, DownloadColumn
-from rich.table import Table
-from rich import box
+import os
+from rich import print
+from rich.panel import Panel
+from rich.prompt import Prompt, Confirm
 
-console = Console(width=64)
-
-style = "dark_cyan on bright_white"
-
-table = Table(show_footer=False)
-table.add_column("请输入书号或书名", no_wrap=True)
-table.add_column(":mag:", no_wrap=True, justify="center")
-
-TABLE_DATA = [
-    ["穿进百合游戏怎么办"],
-    ["木云杉", "4.32万·连载"],
-    ["原创-百合-近代现代-爱情"],
-    ["穿进百合攻略游戏"],
-    # ["[dark_cyan on bright_white]:bookmark: 穿越时空,轻松,脑洞,纸片人,万人迷,抽奖抽卡"],
-]
-
-for row in TABLE_DATA:
-    table.add_row(*row)
-
-for column in table.columns:
-    column.header_style = "bright_white on dark_cyan"
-    column.style = "grey11 on bright_white"
-
-table.border_style = "grey93"
-table.box = box.SIMPLE
-table.pad_edge = True
-table.show_edge = False
-table.min_width = 46
-
-console.print(table)
-
-console.print(
-    " :bookmark: 穿越时空,轻松,脑洞,纸片人,万人迷,抽奖抽卡 ",
-    overflow="ellipsis",
-    style=style,
+print(
+    Panel(
+        "            [bold]重生之我在绿江刮刮乐",
+        style="dark_cyan",
+        border_style="dark_cyan",
+        width=48,
+    )
 )
+
+Prompt.ask("[dark_cyan]  :mag: 请输入书号")
+
+print(
+    Panel(
+        "[bold]穿进百合游戏怎么办[/]\n"
+        + "[white]木云杉\n"
+        + "原创-百合-近代现代-爱情\n"
+        + "穿进百合攻略游戏[/]\n"
+        + ":bookmark: [dark cyan]穿越时空,轻松,脑洞,纸片人,万人迷,抽奖抽卡[/]",
+        style="dark_cyan",
+        border_style="dark_cyan",
+        width=48,
+    )
+)
+
+Prompt.ask("[bold dark_cyan] :floppy_disk: 一键下载 (d)[/] / 自定义下载 (c) / 返回 (b)")
