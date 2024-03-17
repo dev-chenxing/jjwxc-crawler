@@ -86,5 +86,41 @@ def get_novel_title(response):
                         asterisk = True
             title = new_title
         return title.strip()
+
+
+def num2chn(number_string):
+    number = int(number_string)
+    number_string = str(round(number, -2))[: len(number_string) - 2]
+    integer = number_string[:-2] or "0"
+    decimal = number_string[-2:].rstrip("0")
+    decimal = f".{decimal}" if decimal else ""
+    return f"{integer}{decimal}万"
+
+
+def get_second_row(novel):
+    return f"{novel['author']} {num2chn(novel['word_count'])}·{novel['status']}"
+
+
+def get_panel_content(novel):
+    if novel["oneliner"]:
+        return (
+            f"[bold]{novel['title']}[/]\n"
+            + f"[white]{get_second_row(novel)}\n"
+            + f"{novel['genre']}\n"
+            + f"{novel['oneliner']}[/]\n"
+            + f":bookmark: [dark cyan]{novel['tags']}[/]"
+        )
     else:
-        return
+        return (
+            f"[bold]{novel['title']}[/]\n"
+            + f"[white]{novel['author']}\n"
+            + f"{novel['genre']}[/]\n"
+            + f"[deep_sky_blue1]{novel['error']}[/]"
+        )
+
+
+def get_tags(response):
+    tags = ",".join(response.css("div.smallreadbody span a::text").getall())
+    if len(tags) > 24:
+        tags = tags[:21] + "..."
+    return tags
