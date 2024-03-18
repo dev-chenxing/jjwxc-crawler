@@ -4,8 +4,17 @@ from rich.console import Console
 from rich.prompt import Prompt
 from rich.table import Table
 import scrapy
+from scrapy.crawler import CrawlerProcess
+from .novel import NovelSpider
+import os
 
-from .utils import get_novel_title, get_panel_content, get_tags
+from .utils import (
+    get_novel_title,
+    get_panel_content,
+    get_tags,
+    get_word_count,
+    get_status,
+)
 
 console = Console()
 
@@ -54,11 +63,14 @@ class NovelPreviewSpider(scrapy.Spider):
             "请选择一个操作",
             choices=["1", "2"],
             default="1",
-            show_choices=True,
+            show_choices=False,
             show_default=False,
         )
         if answer == "1":
-            print("一键下载中")
+            os.system(f"scrapy crawl novel -a id={self.id} --loglevel WARNING")
+            # process = CrawlerProcess()
+            # process.crawl(NovelSpider, id=self.id)
+            # process.start()
 
     def get_novel_item(self, response):
         novel = {}
@@ -76,8 +88,8 @@ class NovelPreviewSpider(scrapy.Spider):
             novel["oneliner"] = smallreadbody[2].get().split("：")[1]
         novel["author"] = response.css("h2 a span::text").get()
         novel["genre"] = response.css("li span::text")[1].get().strip()
-        novel["word_count"] = response.css("li span::text")[8].get()[:-1]
-        novel["status"] = "连载"
+        novel["word_count"] = get_word_count(response)
+        novel["status"] = get_status(response)
         return novel
 
     def close(self, spider):

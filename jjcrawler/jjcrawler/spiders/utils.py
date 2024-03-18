@@ -12,7 +12,6 @@ def process_desc(desc_selector_list):
     first_line_break = False
     for selector in desc_selector_list:
         children = selector.xpath("child::node()")
-        print(children)
         if children != []:
             desc_list += children.getall()
         else:
@@ -23,12 +22,10 @@ def process_desc(desc_selector_list):
             if first_line_break == False:
                 first_line_break = True
             else:
-                print("append empty line")
                 desc.append("")
         elif line[:3] == "<hr":
             continue
         else:
-            print(f"append{line}")
             desc.append(line)
             first_line_break = False
     return desc
@@ -65,7 +62,6 @@ def make_directories(novel) -> str:
     directory = f"{default_directory}{novel['id'].rjust(7, '0')}-{novel['title']}\\"
     if not os.path.exists(directory):
         os.mkdir(directory)
-    print(directory)
     return directory
 
 
@@ -90,7 +86,7 @@ def get_novel_title(response):
 
 def num2chn(number_string):
     number = int(number_string)
-    number_string = str(round(number, -2))[: len(number_string) - 2]
+    number_string = str(round(number, -2))[: len(number_string) - 2].rjust(2, "0")
     integer = number_string[:-2] or "0"
     decimal = number_string[-2:].rstrip("0")
     decimal = f".{decimal}" if decimal else ""
@@ -98,7 +94,10 @@ def num2chn(number_string):
 
 
 def get_second_row(novel):
-    return f"{novel['author']} {num2chn(novel['word_count'])}·{novel['status']}"
+    left = novel["author"]
+    right = f"{num2chn(novel['word_count'])}·{novel['status']}"
+    center = "".rjust(45 - len(left.encode("gbk")) - len(right.encode("gbk")), " ")
+    return f"{left}{center}{right}"
 
 
 def get_panel_content(novel):
@@ -121,6 +120,25 @@ def get_panel_content(novel):
 
 def get_tags(response):
     tags = ",".join(response.css("div.smallreadbody span a::text").getall())
-    if len(tags) > 24:
+    if len(tags.encode("gbk")) > 42:
         tags = tags[:21] + "..."
     return tags
+
+
+def get_word_count(response):
+    text = response.css("li span::text")[8].get()[:-1]
+    if text == "版权转化":
+        text = response.css("li span::text")[7].get()[:-1]
+    if text == "全文字数":
+        text = response.css("li span::text")[9].get()[:-1]
+    return text
+
+
+def get_status(response):
+    status = (
+        response.css("ul.rightul li span font::text").get()
+        or response.css("ul.rightul li span::text")[6].get()
+    )
+    if status == "文章进度：":
+        status = response.css("ul.rightul li span::text")[7].get()
+    return status
