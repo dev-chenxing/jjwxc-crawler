@@ -6,28 +6,32 @@ from .utils import (
     get_novel_title,
     get_chapter_id,
     make_directories,
+    set_log_level,
 )
 from .novel_preview import novel_preview
 from .doc import create_desc_doc, create_chapter_doc
+from rich.panel import Panel
 
 
 class NovelSpider(scrapy.Spider):
     name = "novel"
 
     def __init__(self, id=None, *args, **kwargs):
+        set_log_level()
         super(NovelSpider, self).__init__(*args, **kwargs)
 
         self.allowed_domains = ["www.jjwxc.net"]
         self.start_urls = [f"https://www.jjwxc.net/onebook.php?novelid={id}"]
         self.id = str(id)
+        self.parsed = False
 
     def parse(self, response):
-        download = novel_preview()
-        novel = self.get_novel_item(response)
-        if novel == None:
-            print("该文已经删除或者全文存稿中")
+        self.parsed = True
+        download = novel_preview(self.id, response)
+        if not download:
             return
 
+        novel = self.get_novel_item(response)
         self.directory = make_directories(novel)
         if novel["tag_list"] != None:
             create_desc_doc(self.directory, novel)
@@ -80,3 +84,14 @@ class NovelSpider(scrapy.Spider):
         chapter["author_said"] = process_desc(response.css("div.readsmall"))
 
         create_chapter_doc(self.directory, chapter)
+
+    def close(self, spider):
+        if not self.parsed:
+            print(
+                Panel(
+                    "      非常抱歉，相关内容已被锁定或删除。",
+                    style="bold red",
+                    border_style="bright_white",
+                    width=48,
+                )
+            )

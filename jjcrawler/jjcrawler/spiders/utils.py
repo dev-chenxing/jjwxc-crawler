@@ -1,6 +1,7 @@
 import requests
 import re
 import os
+import logging
 
 from .config import default_directory
 
@@ -149,3 +150,10 @@ def get_author(response):
         response.css("h2 a span::text").get()
         or response.css("div.noveltitle span a::text").get()
     )
+
+
+def set_log_level():
+    scrapy_logger = logging.getLogger("scrapy")
+    scrapy_logger.setLevel(logging.WARNING)
+    asyncio_logger = logging.getLogger("asyncio")
+    asyncio_logger.setLevel(logging.WARNING)
