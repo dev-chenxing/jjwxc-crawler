@@ -26,18 +26,14 @@
 
 ### 特点功能
 
--   提供 Fluent 用户界面，下载进度与书籍封面显示。
--   下载目录自定义。
--   同时支持命令行界面。
--   输出可选 DOCX、TXT 格式。
--   支持书籍批量下载。
+-   命令行界面
+-   下载目录自定义
+-   输出 DOCX 格式
 -   ...................
 
 有建议或 bug 可以提 issue.
 
-图形界面使用[PyQt-Fluent-Widgets](https://pyqt-fluent-widgets.readthedocs.io/en/latest/index.html)界面编写。
-
-[Releases]()页面发布了已经打包好的 exe 可执行程序，包括图形化版本和命令行版本。
+命令行界面使用命令行 UI 库[Rich](https://github.com/Textualize/rich)编写。
 
 界面样例：
 
@@ -46,43 +42,38 @@
   <img src="post/example2.png" width="400"/-->
 </div>
 
-# 快速上手
+# 安装文档
 
-## 方法一、运行 exe
 
-[Release]()页面发布了已经打包好的 exe 可执行程序，包括图形化版本和命令行版本。
+### 下载文件
 
-用户只需要双击 exe 就可以使用啦！
+点击Code - Download ZIP，下载后解压缩得到文件夹，建议重命名为`jjwxc-crawler`
 
-## 方法二、运行 python 脚本（推荐）
-
-### 使用前安装需要的包
+### 环境配置
 
 -   Python 3.9.15
+-   Windows
 
-安装 Python 后在 cmd 输入以下命令行安装所需的包
-
-```
-pip install -r requirements.txt -i https://pypi.org/simple/
-```
-
-### 使用命令行模式运行
+安装 Python 后，第一步，打开所在目录的命令行，输入以下命令创建并激活虚拟环境
 
 ```powershell
-# 启动命令行小程序
-.\jjcrawler
-
-# 下载书号为8508851的小说的所有非V章节到默认文件夹.\novels
-.\jjcrawler 8508851
-
-# 下载书号为8508851的小说的所有非V章节到D:\some\random\directory文件夹
-.\jjcrawler -o D:\some\random\directory 8508851
+python -m venv venv   # 创建名为venv的Python虚拟环境
+venv\Scripts\activate # Windows系统下激活虚拟环境venv
 ```
 
-### 使用图形界面运行
+此时命令行前应显示有`(venv)`，表示当前已激活虚拟环境`venv`
 
+第二部，在虚拟环境内安装Scrapy和其他依赖
+
+```powershell
+pip install -r requirements.txt
 ```
-.\jjcrawler-gui
+
+### 运行小程序
+
+```powershell
+# 进入程序所在目录
+cd jjcrawler 
 ```
 
 **[⬆ 回到顶部](#特点功能)**

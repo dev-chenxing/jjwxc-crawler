@@ -142,3 +142,10 @@ def get_status(response):
     if status == "文章进度：":
         status = response.css("ul.rightul li span::text")[7].get()
     return status
+
+
+def get_author(response):
+    return (
+        response.css("h2 a span::text").get()
+        or response.css("div.noveltitle span a::text").get()
+    )

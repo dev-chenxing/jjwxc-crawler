@@ -14,6 +14,7 @@ from .utils import (
     get_tags,
     get_word_count,
     get_status,
+    get_author,
 )
 
 console = Console()
@@ -67,10 +68,11 @@ class NovelPreviewSpider(scrapy.Spider):
             show_default=False,
         )
         if answer == "1":
-            os.system(f"scrapy crawl novel -a id={self.id} --loglevel WARNING")
+            # os.system(f"scrapy crawl novel -a id={self.id} --loglevel WARNING")
             # process = CrawlerProcess()
             # process.crawl(NovelSpider, id=self.id)
             # process.start()
+            pass
 
     def get_novel_item(self, response):
         novel = {}
@@ -86,7 +88,7 @@ class NovelPreviewSpider(scrapy.Spider):
         else:
             novel["tags"] = get_tags(response)
             novel["oneliner"] = smallreadbody[2].get().split("：")[1]
-        novel["author"] = response.css("h2 a span::text").get()
+        novel["author"] = get_author(response)
         novel["genre"] = response.css("li span::text")[1].get().strip()
         novel["word_count"] = get_word_count(response)
         novel["status"] = get_status(response)
@@ -102,3 +104,7 @@ class NovelPreviewSpider(scrapy.Spider):
                     width=48,
                 )
             )
+
+
+def novel_preview():
+    pass

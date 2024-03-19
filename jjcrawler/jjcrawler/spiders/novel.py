@@ -7,6 +7,7 @@ from .utils import (
     get_chapter_id,
     make_directories,
 )
+from .novel_preview import novel_preview
 from .doc import create_desc_doc, create_chapter_doc
 
 
@@ -21,6 +22,7 @@ class NovelSpider(scrapy.Spider):
         self.id = str(id)
 
     def parse(self, response):
+        download = novel_preview()
         novel = self.get_novel_item(response)
         if novel == None:
             print("该文已经删除或者全文存稿中")
