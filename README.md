@@ -27,7 +27,6 @@
 ### 特点功能
 
 -   命令行界面
--   下载目录自定义
 -   输出 DOCX 格式
 -   ...................
 
@@ -44,10 +43,9 @@
 
 # 安装文档
 
-
 ### 下载文件
 
-点击Code - Download ZIP，下载后解压缩得到文件夹，建议重命名为`jjwxc-crawler`
+点击 Code - Download ZIP，下载后解压缩得到文件夹，建议重命名为`jjwxc-crawler`
 
 ### 环境配置
 
@@ -63,7 +61,7 @@ venv\Scripts\activate # Windows系统下激活虚拟环境venv
 
 此时命令行前应显示有`(venv)`，表示当前已激活虚拟环境`venv`
 
-第二部，在虚拟环境内安装Scrapy和其他依赖
+第二部，在虚拟环境内安装 Scrapy 和其他依赖
 
 ```powershell
 pip install -r requirements.txt
@@ -73,7 +71,15 @@ pip install -r requirements.txt
 
 ```powershell
 # 进入程序所在目录
-cd jjcrawler 
+cd jjcrawler
+
+# 运行爬虫命令，其中ID为书号
+scrapy crawl novel -a id=ID
+
+# 例如，我要下载书号为1的测试文，则运行以下命令行
+scrapy crawl novel -a id=1
 ```
+
+下载章节将保存至根目录下的 novels 文件夹
 
 **[⬆ 回到顶部](#特点功能)**

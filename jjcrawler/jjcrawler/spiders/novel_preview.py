@@ -1,7 +1,7 @@
 from rich import print
 from rich.panel import Panel
 from rich.console import Console
-from rich.prompt import Prompt
+from rich.prompt import Confirm, Prompt
 from rich.table import Table
 import scrapy
 
@@ -39,18 +39,12 @@ def novel_preview(id, response):
     buttons.add_column()
     buttons.add_column()
     buttons.add_row(
-        Panel("[bold dark_cyan][1] :floppy_disk: 一键下载", border_style="dark_cyan"),
-        Panel("[2] :back: 返回"),
+        Panel("[bold dark_cyan] :floppy_disk: 一键下载", border_style="dark_cyan"),
+        Panel(" :back: 返回"),
     )
     print(buttons)
-    answer = Prompt.ask(
-        "请选择一个操作",
-        choices=["1", "2"],
-        default="1",
-        show_choices=False,
-        show_default=False,
-    )
-    if answer == "1":
+    answer = Confirm.ask("是否一键下载？")
+    if answer == "y":
         return True
 
 

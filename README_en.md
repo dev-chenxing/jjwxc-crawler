@@ -24,18 +24,13 @@
 
 Features:
 
--   Fluent GUI, with download progress bar and book cover display.
--   Customize download directory.
--   With user-friendly CLI interface.
+-   CLI interface.
 -   Output in .docx format.
--   Supports multiple books download at the same time.
 -   ...................
 
 If you have any suggestion or have found any bug, open an issue.
 
-The GUI was built with [PyQt-Fluent-Widgets](https://pyqt-fluent-widgets.readthedocs.io/en/latest/index.html).
-
-A portable executable is available in [Releases](), which has both the graphical user interface and the console app.
+The CLI was built with [Rich](https://github.com/Textualize/rich).
 
 Preview:
 
@@ -46,39 +41,38 @@ Preview:
 
 # Install and Usage
 
-## Method 1: Run the .exe
+## Download the Source Code
 
-A portable executable is available in [Releases](), which has both the graphical user interface and the console app.
-
-Simply run the jjcrawler.exe and you are good to go!
-
-## Method 2: Run the python scripts (Recommanded)
+Click Code - Download ZIP to download the source code. Unzip it and rename it to `jjwxc-crawler` (recommended).
 
 ### Install Requirements
 
-```
-Python 3.8
+-   Python 3.9.15
+-   Windows
+
+Assuming you now have Python installed, first, open a terminal in the root directory, that is, `\jjwxc-crawler`, and run the following commands to create and activate a virtual environment.
+
+```powershell
+python -m venv venv
+venv\Scripts\activate
 ```
 
-```
-pip install -r requirements.txt -i https://pypi.org/simple/
+Second, install Scrapy and other dependencies within the virtual environment, so make sure your `venv` virtual environment is activated.
+
+```powershell
+pip install -r requirements.txt
 ```
 
 ### Run the Console App
 
 ```powershell
-# Launch the CLI app
-.\jjcrawler
+cd jjcrawler
 
-# Download all non-V chapters of the novel with the id 8508851 in the default directory .\novels
-.\jjcrawler 8508851
+# Download all non-V chapters of the novel with the specified id in the directory .\novels
+scrapy crawl novel -a id=ID
 
-# Download all non-V chapters of the novel with the id 8508851 in the directory D:\some\random\directory
-.\jjcrawler -o D:\some\random\directory 8508851
+# For example, like this
+scrapy crawl novel -a id=1
 ```
 
-### Run the GUI
-
-```
-.\jjcrawler-gui
-```
+**[⬆ Back to Top](#特点功能)**

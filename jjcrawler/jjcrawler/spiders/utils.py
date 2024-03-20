@@ -152,8 +152,10 @@ def get_author(response):
     )
 
 
+loggers = ["scrapy", "asyncio", "urllib3"]
+
+
 def set_log_level():
-    scrapy_logger = logging.getLogger("scrapy")
-    scrapy_logger.setLevel(logging.WARNING)
-    asyncio_logger = logging.getLogger("asyncio")
-    asyncio_logger.setLevel(logging.WARNING)
+    for logger in loggers:
+        log = logging.getLogger(logger)
+        log.setLevel(logging.WARNING)
