@@ -26,6 +26,7 @@ Features:
 
 -   CLI interface.
 -   Output in .docx format.
+-   Customizable output path.
 -   ...................
 
 If you have any suggestion or have found any bug, open an issue.
