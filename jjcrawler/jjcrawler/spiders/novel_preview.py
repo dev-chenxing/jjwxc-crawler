@@ -3,7 +3,6 @@ from rich.panel import Panel
 from rich.console import Console
 from rich.prompt import Confirm, Prompt
 from rich.table import Table
-import scrapy
 
 from .utils import (
     get_novel_title,
@@ -44,8 +43,7 @@ def novel_preview(id, response):
     )
     print(buttons)
     answer = Confirm.ask("是否一键下载？")
-    if answer == "y":
-        return True
+    return answer
 
 
 def get_novel_item(id, response):

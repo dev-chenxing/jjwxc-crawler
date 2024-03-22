@@ -11,6 +11,7 @@ from .utils import (
 from .novel_preview import novel_preview
 from .doc import create_desc_doc, create_chapter_doc
 from rich.panel import Panel
+from rich import print
 
 
 class NovelSpider(scrapy.Spider):
@@ -95,3 +96,5 @@ class NovelSpider(scrapy.Spider):
                     width=48,
                 )
             )
+        else:
+            print(f"下载完毕！（路径为 {self.directory} ）")

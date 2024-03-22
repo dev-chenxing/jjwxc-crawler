@@ -2,8 +2,6 @@ from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
-from .utils import process_desc
-
 
 def set_doc_style(doc):
     section = doc.sections[0]
@@ -19,6 +17,7 @@ def set_doc_style(doc):
 
 
 def create_desc_doc(directory, novel):
+    print(f"下载 文案 中...")
     description_doc = Document()
     file_name = "文案"
     set_doc_style(description_doc)
@@ -107,6 +106,8 @@ def get_heading(chapter):
 def create_chapter_doc(directory, chapter):
     chapter_doc = Document()
     file_name = get_file_name(chapter)
+    print(f"下载 {file_name} 中...")
+
     set_doc_style(chapter_doc)
 
     heading = get_heading(chapter)
@@ -127,6 +128,5 @@ def create_chapter_doc(directory, chapter):
                 author_said_paragraph.runs[0].font.color.rgb = RGBColor(
                     0x00, 0x99, 0x00
                 )
-
     output_path = f"{directory}{file_name}.docx"
     chapter_doc.save(output_path)

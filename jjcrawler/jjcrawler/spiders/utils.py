@@ -38,6 +38,7 @@ def get_cover_path(directory, title):
 
 
 def download_cover(directory, novel):
+    print(f"下载 封面 中...")
     url = novel["cover_url"]
     if url:
         cover_path = get_cover_path(directory, novel["title"])
@@ -153,6 +154,7 @@ def get_author(response):
 
 
 loggers = ["scrapy", "asyncio", "urllib3"]
+# loggers = ["asyncio", "urllib3"]
 
 
 def set_log_level():

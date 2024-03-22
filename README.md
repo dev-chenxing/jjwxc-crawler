@@ -61,7 +61,7 @@ venv\Scripts\activate # Windows系统下激活虚拟环境venv
 
 此时命令行前应显示有`(venv)`，表示当前已激活虚拟环境`venv`
 
-第二部，在虚拟环境内安装 Scrapy 和其他依赖
+第二步，在虚拟环境内安装 Scrapy 和其他依赖
 
 ```powershell
 pip install -r requirements.txt
