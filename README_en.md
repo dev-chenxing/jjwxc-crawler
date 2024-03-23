@@ -36,8 +36,7 @@ The CLI was built with [Rich](https://github.com/Textualize/rich).
 Preview:
 
 <div align="center">
-  <!--img src="post/example1.png" width="400"/>
-  <img src="post/example2.png" width="400"/-->
+  <img src="press/IMG_0409.gif" width="800px"/>
 </div>
 
 # Install and Usage
