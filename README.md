@@ -38,10 +38,7 @@
 界面样例：
 
 <div align="center">
-  <img src="press/IMG_0409.gif" width="600px"/>
-  <video style="width: 600px;" autoplay muted loop playsinline>
-    <source src="press/preview.mp4" type="video/mp4" />
-  </video>
+  <img src="press/IMG_0409.gif" width="800px"/>
 </div>
 
 # 安装文档
