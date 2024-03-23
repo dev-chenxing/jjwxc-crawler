@@ -1,4 +1,4 @@
-<a href="https://www.jjwxc.net//"><img align="right" src="assets/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
+<a href="https://www.jjwxc.net//"><img align="center" src="public/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
 
 <h1 align="center">
    Scraping Books from the 晋江文学城 Website
@@ -36,7 +36,7 @@ The CLI was built with [Rich](https://github.com/Textualize/rich).
 Preview:
 
 <div align="center">
-  <img src="press/IMG_0409.gif" width="800px"/>
+  <img src="public/preview.gif" width="800px"/>
 </div>
 
 # Install and Usage

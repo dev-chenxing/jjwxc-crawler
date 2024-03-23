@@ -1,4 +1,4 @@
-<a href="https://www.jjwxc.net//"><img align="right" src="assets/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
+<a href="https://www.jjwxc.net//"><img align="center" src="public/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
 
 <div>
   <h1 align="center">
@@ -38,7 +38,7 @@
 界面样例：
 
 <div align="center">
-  <img src="press/IMG_0409.gif" width="800px"/>
+  <img src="public/preview.gif" width="800px"/>
 </div>
 
 # 安装文档
