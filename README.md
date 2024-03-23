@@ -37,6 +37,9 @@
 
 界面样例：
 
+![](./press/preview.mp4)
+![](./press/preview.gif)
+
 <div align="center">
   <!--img src="post/example1.png" width="400"/>
   <img src="post/example2.png" width="400"/-->
