@@ -1,4 +1,4 @@
-<a href="https://www.jjwxc.net//"><img align="center" src="public/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a>
+<div align="center"><a href="https://www.jjwxc.net//"><img src="public/logo.png" alt="jjwxc-logo" title="jjwxc" width="220"></a></div>
 
 <h1 align="center">
    Scraping Books from the 晋江文学城 Website
