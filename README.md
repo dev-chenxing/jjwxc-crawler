@@ -37,15 +37,11 @@
 
 界面样例：
 
-![Preview](/press/preview.mp4)
-
-<video style="width: 600px;" autoplay muted loop playsinline>
-  <source src="/press/preview.mp4" type="video/mp4" />
-</video>
-
 <div align="center">
-  <!--img src="post/example1.png" width="400"/>
-  <img src="post/example2.png" width="400"/-->
+  <img src="press/preview.gif" width="600"/>
+  <video style="width: 600px;" autoplay muted loop playsinline>
+    <source src="press/preview.mp4" type="video/mp4" />
+  </video>
 </div>
 
 # 安装文档
