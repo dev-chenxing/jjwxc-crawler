@@ -37,8 +37,11 @@
 
 界面样例：
 
-![](./press/preview.mp4)
-![](./press/preview.gif)
+![Preview](/press/preview.mp4)
+
+<video style="width: 600px;" autoplay muted loop playsinline>
+  <source src="/press/preview.mp4" type="video/mp4" />
+</video>
 
 <div align="center">
   <!--img src="post/example1.png" width="400"/>
