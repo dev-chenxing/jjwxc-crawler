@@ -12,6 +12,7 @@ from .novel_preview import novel_preview
 from .doc import create_desc_doc, create_chapter_doc
 from rich.panel import Panel
 from rich import print
+import re
 
 
 class NovelSpider(scrapy.Spider):
@@ -25,6 +26,7 @@ class NovelSpider(scrapy.Spider):
         self.start_urls = [f"https://www.jjwxc.net/onebook.php?novelid={id}"]
         self.id = str(id)
         self.parsed = False
+        self.downloaded = False
 
     def parse(self, response):
         self.parsed = True
@@ -37,6 +39,7 @@ class NovelSpider(scrapy.Spider):
         if novel["tag_list"] != None:
             create_desc_doc(self.directory, novel)
             download_cover(self.directory, novel)
+            self.downloaded = True
 
         chapters = response.css("span div a")
         if chapters == []:
@@ -56,6 +59,9 @@ class NovelSpider(scrapy.Spider):
         if novel["title"] == None:
             return
         novel["cover_url"] = response.css("img.noveldefaultimage::attr(src)").get()
+        page_title = response.css("title::text").get()
+        if re.findall("小树苗", page_title) != []:
+            return get_children_novel_item(self.id, novel["title"], response)
         smallreadbody = response.css("div.smallreadbody span::text")
         if smallreadbody == []:
             novel["desc"] = response.css("div.smallreadbody::text").getall()
@@ -83,7 +89,6 @@ class NovelSpider(scrapy.Spider):
             "//div[@class='novelbody']/div/node()"
         ).getall()
         chapter["author_said"] = process_desc(response.css("div.readsmall"))
-
         create_chapter_doc(self.directory, chapter)
 
     def close(self, spider):
@@ -97,4 +102,23 @@ class NovelSpider(scrapy.Spider):
                 )
             )
         else:
-            print(f"下载完毕！（路径为 {self.directory} ）")
+            try:
+                if self.downloaded:
+                    print(f"下载完毕！（下载路径为 {self.directory} ）")
+            except:
+                pass
+
+
+def get_children_novel_item(id, title, response):
+    novel = {}
+    novel["id"] = id
+    novel["title"] = title
+    novel_meta = response.css("div.novelmeta_item_div span::text")
+    novel["desc"] = process_desc(
+        response.xpath("//div[@class='novelmeta_item_div']/span")[10].css("*").getall()
+    )
+    novel["tag_list"] = response.css("span span a::text").getall()
+    novel["keywords"] = novel_meta[-6].get() + novel_meta[-5].get()
+    novel["oneliner"] = novel_meta[-4].get() + novel_meta[-3].get()
+    novel["meaning"] = novel_meta[-2].get() + novel_meta[-1].get()
+    return novel

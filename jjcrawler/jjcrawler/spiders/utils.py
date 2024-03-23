@@ -2,6 +2,9 @@ import requests
 import re
 import os
 import logging
+from rich.table import Table
+from rich.panel import Panel
+from rich import print
 
 from .config import default_directory
 
@@ -120,8 +123,12 @@ def get_panel_content(novel):
         )
 
 
-def get_tags(response):
-    tags = ",".join(response.css("div.smallreadbody span a::text").getall())
+def get_tags(response, is_children_book=False):
+    if is_children_book:
+        tag_list = response.css("span span a::text").getall()
+    else:
+        tag_list = response.css("div.smallreadbody span a::text").getall()
+    tags = ",".join(tag_list)
     if len(tags.encode("gbk")) > 42:
         tags = tags[:21] + "..."
     return tags
@@ -161,3 +168,18 @@ def set_log_level():
     for logger in loggers:
         log = logging.getLogger(logger)
         log.setLevel(logging.WARNING)
+
+
+def print_buttons():
+    buttons = Table.grid(padding=0)
+    buttons.add_column()
+    buttons.add_column()
+    buttons.add_row(
+        Panel("[bold dark_cyan]:floppy_disk: 一键下载", border_style="dark_cyan"),
+        Panel(":back: 返回"),
+    )
+    print(buttons)
+
+
+def remove_reserved_characters(string):
+    return re.sub(r'[<>:"/\\|?*]', "", string)

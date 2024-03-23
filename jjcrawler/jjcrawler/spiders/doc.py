@@ -1,6 +1,7 @@
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+from .utils import remove_reserved_characters
 
 
 def set_doc_style(doc):
@@ -88,10 +89,12 @@ def left_indent(line):
 
 
 def get_file_name(chapter):
+    title = chapter["title"]
+    title = remove_reserved_characters(title)
     if chapter["id"] != None:
-        file_name = f"第{chapter['id']}章-{chapter['title']}"
+        file_name = f"第{chapter['id']}章-{title}"
     else:
-        file_name = chapter["title"]
+        file_name = title
     return file_name
 
 
