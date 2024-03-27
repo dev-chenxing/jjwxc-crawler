@@ -27,7 +27,7 @@
 ### 特点功能
 
 -   命令行界面
--   输出 DOCX 格式
+-   支持输出 DOCX 和 TXT 格式
 -   可自定义输出路径
 -   ...................
 
@@ -81,5 +81,12 @@ scrapy crawl novel -a id=1
 ```
 
 下载章节将保存至根目录下的 novels 文件夹
+
+默认输出格式为.docx，如果要更改为.txt 格式输出，可编辑`\jjcrawler\jjcrawler\spiders\config.py`中参数
+
+```python
+# docx | txt
+format = "txt"
+```
 
 **[⬆ 回到顶部](#特点功能)**

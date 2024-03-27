@@ -1,7 +1,7 @@
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from .utils import remove_reserved_characters
+from .utils import get_file_name, get_heading, format_body
 
 
 def set_doc_style(doc):
@@ -41,69 +41,6 @@ def create_desc_doc(directory, novel):
 
     output_path = f"{directory}{file_name}.docx"
     description_doc.save(output_path)
-
-
-def isEmpty(line: str):
-    if line == "":
-        return True
-    elif line == "[":
-        return True
-    elif line == "]":
-        return True
-    elif line == "支持手机扫描二维码阅读":
-        return True
-    elif line == "wap阅读点击：":
-        return True
-    elif line == "打开晋江App扫码即可阅读":
-        return True
-    else:
-        return False
-
-
-def format_body(body):
-    body_list = []
-    first_line_break = False
-    second_line_break = False
-    for line in body:
-        line = line.strip()
-        if isEmpty(line) or line[:4] == "<div" or line[:5] == "<span":
-            continue
-        elif line == "<br>":
-            if second_line_break == False:
-                if first_line_break == True:
-                    second_line_break = True
-                else:
-                    first_line_break = True
-        else:
-            if second_line_break == True:
-                body_list.append("")
-            line = left_indent(line)
-            body_list.append(line)
-            first_line_break = False
-            second_line_break = False
-    return body_list
-
-
-def left_indent(line):
-    return "\u3000\u3000" + line
-
-
-def get_file_name(chapter):
-    title = chapter["title"]
-    title = remove_reserved_characters(title)
-    if chapter["id"] != None:
-        file_name = f"第{chapter['id']}章-{title}"
-    else:
-        file_name = title
-    return file_name
-
-
-def get_heading(chapter):
-    if chapter["id"] != None:
-        heading = f"第{chapter['id']}章 {chapter['title']}"
-    else:
-        heading = chapter["title"]
-    return heading
 
 
 def create_chapter_doc(directory, chapter):

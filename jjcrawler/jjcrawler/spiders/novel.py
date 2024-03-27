@@ -10,9 +10,11 @@ from .utils import (
 )
 from .novel_preview import novel_preview
 from .doc import create_desc_doc, create_chapter_doc
+from .txt import create_desc_txt, create_chapter_txt
 from rich.panel import Panel
 from rich import print
 import re
+from .config import format
 
 
 class NovelSpider(scrapy.Spider):
@@ -37,7 +39,10 @@ class NovelSpider(scrapy.Spider):
         novel = self.get_novel_item(response)
         self.directory = make_directories(novel)
         if novel["tag_list"] != None:
-            create_desc_doc(self.directory, novel)
+            if format == "docx":
+                create_desc_doc(self.directory, novel)
+            elif format == "txt":
+                create_desc_txt(self.directory, novel)
             download_cover(self.directory, novel)
             self.downloaded = True
 
@@ -89,7 +94,10 @@ class NovelSpider(scrapy.Spider):
             "//div[@class='novelbody']/div/node()"
         ).getall()
         chapter["author_said"] = process_desc(response.css("div.readsmall"))
-        create_chapter_doc(self.directory, chapter)
+        if format == "docx":
+            create_chapter_doc(self.directory, chapter)
+        elif format == "txt":
+            create_chapter_txt(self.directory, chapter)
 
     def close(self, spider):
         if not self.parsed:

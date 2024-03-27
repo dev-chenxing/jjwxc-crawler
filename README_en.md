@@ -25,7 +25,7 @@
 Features:
 
 -   CLI interface.
--   Output in .docx format.
+-   Output in .docx or .txt format.
 -   Customizable output path.
 -   ...................
 
@@ -73,6 +73,15 @@ scrapy crawl novel -a id=ID
 
 # For example, like this
 scrapy crawl novel -a id=1
+```
+
+Default output format is .docx
+
+If you would like to download the chapters in .txt format, please edit `\jjcrawler\jjcrawler\spiders\config.py`
+
+```python
+# docx | txt
+format = "txt"
 ```
 
 **[⬆ Back to Top](#特点功能)**
