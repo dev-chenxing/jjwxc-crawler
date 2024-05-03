@@ -1,10 +1,11 @@
+from pathlib import Path
 from .utils import get_file_name, get_heading, format_body
 
 
-def create_desc_txt(directory, novel):
-    print(f"下载 文案 中...")
+def create_desc_txt(directory: Path, novel):
+    print("下载 文案 中...")
     file_name = "文案"
-    output_path = f"{directory}{file_name}.txt"
+    output_path = directory / f"{file_name}.txt"
     description_txt = open(output_path, "w", encoding="utf-8")
 
     for paragraph in novel["desc"]:
@@ -22,11 +23,11 @@ def create_desc_txt(directory, novel):
     description_txt.close()
 
 
-def create_chapter_txt(directory, chapter):
+def create_chapter_txt(directory: Path, chapter):
     file_name = get_file_name(chapter)
     print(f"下载 {file_name} 中...")
 
-    output_path = f"{directory}{file_name}.txt"
+    output_path = directory / f"{file_name}.txt"
     chapter_txt = open(output_path, "w", encoding="utf-8")
 
     heading = get_heading(chapter)

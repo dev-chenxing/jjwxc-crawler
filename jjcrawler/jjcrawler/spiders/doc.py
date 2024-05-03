@@ -1,3 +1,4 @@
+from pathlib import Path
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -17,7 +18,7 @@ def set_doc_style(doc):
     normal_paragraph_format.line_spacing = Pt(14)
 
 
-def create_desc_doc(directory, novel):
+def create_desc_doc(directory: Path, novel):
     print(f"下载 文案 中...")
     description_doc = Document()
     file_name = "文案"
@@ -39,11 +40,11 @@ def create_desc_doc(directory, novel):
     meaning_paragraph = description_doc.add_paragraph(novel["meaning"])
     meaning_paragraph.runs[0].font.color.rgb = RGBColor(0xF9, 0x8C, 0x4D)
 
-    output_path = f"{directory}{file_name}.docx"
+    output_path = directory / f"{file_name}.docx"
     description_doc.save(output_path)
 
 
-def create_chapter_doc(directory, chapter):
+def create_chapter_doc(directory: Path, chapter):
     chapter_doc = Document()
     file_name = get_file_name(chapter)
     print(f"下载 {file_name} 中...")
@@ -68,5 +69,5 @@ def create_chapter_doc(directory, chapter):
                 author_said_paragraph.runs[0].font.color.rgb = RGBColor(
                     0x00, 0x99, 0x00
                 )
-    output_path = f"{directory}{file_name}.docx"
+    output_path = directory / f"{file_name}.docx"
     chapter_doc.save(output_path)

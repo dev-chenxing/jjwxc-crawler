@@ -1,7 +1,7 @@
 import requests
 import re
-import os
 import logging
+from pathlib import Path
 from rich.table import Table
 from rich.panel import Panel
 from rich import print
@@ -35,12 +35,12 @@ def process_desc(desc_selector_list):
     return desc
 
 
-def get_cover_path(directory, title):
+def get_cover_path(directory: Path, title):
     file_extension = ".jpg"
-    return f"{directory}{title}{file_extension}"
+    return directory / f"{title}{file_extension}"
 
 
-def download_cover(directory, novel):
+def download_cover(directory: Path, novel):
     print(f"下载 封面 中...")
     url = novel["cover_url"]
     if url:
@@ -61,12 +61,10 @@ def get_chapter_id(url: str) -> str:
     return chapter_id
 
 
-def make_directories(novel) -> str:
-    if not os.path.exists(default_directory):
-        os.mkdir(default_directory)
-    directory = f"{default_directory}{novel['id'].rjust(7, '0')}-{novel['title']}\\"
-    if not os.path.exists(directory):
-        os.mkdir(directory)
+def make_directories(novel) -> Path:
+    novel_slug = f"{novel['id'].rjust(7, '0')}-{novel['title']}"
+    directory = default_directory / novel_slug
+    directory.mkdir(parents=True, exist_ok=True)
     return directory
 
 
