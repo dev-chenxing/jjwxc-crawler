@@ -13,14 +13,14 @@
       <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
       <a href="https://www.github.com/labuladong" target="_blank"><img src="https://img.shields.io/badge/作者-@陈刑-689e75.svg?logo=GitHub"></a>
       <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
-      <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-crawler?color=7fbc87">
+      <img alt="last commit" src="https://img.shields.io/github/last-commit/dev-chenxing/jjwxc-crawler?color=7fbc87">
   </p>
 </div>
 
 <h4 align="center">
     <p>
         <b>简体中文</b> |
-        <a href="https://github.com/amaliegay/jjwxc-crawler/blob/main/README_en.md">English</a>
+        <a href="https://github.com/dev-chenxing/jjwxc-crawler/blob/main/README_en.md">English</a>
     </p>
 </h4>
 

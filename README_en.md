@@ -12,12 +12,12 @@
     <img alt="language: python" src="https://img.shields.io/badge/language-Python-118629">
 		<img alt="creator: chenxing" src="https://img.shields.io/badge/creator-陈刑-689e75">
     <img alt="release version" src="https://img.shields.io/badge/release-v1.0.0-9ccca4">
-    <img alt="last commit" src="https://img.shields.io/github/last-commit/amaliegay/jjwxc-crawler?color=7fbc87">
+    <img alt="last commit" src="https://img.shields.io/github/last-commit/dev-chenxing/jjwxc-crawler?color=7fbc87">
 </p>
 
 <h4 align="center">
     <p>
-        <a href="https://github.com/amaliegay/jjwxc-crawler">简体中文</a> |
+        <a href="https://github.com/dev-chenxing/jjwxc-crawler">简体中文</a> |
         <b>English</b>
     </p>
 </h4>
