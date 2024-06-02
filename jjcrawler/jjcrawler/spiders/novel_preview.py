@@ -17,7 +17,7 @@ from .utils import (
 console = Console()
 
 
-def novel_preview(id, response):
+def novel_preview(id, response, assume_yes):
     novel, is_children_book = get_novel_item(id, response)
     if novel == None:
         panel = Panel(
@@ -46,9 +46,12 @@ def novel_preview(id, response):
                 )
             )
         else:
-            print_buttons()
-            answer = Confirm.ask("是否一键下载？")
-            return answer
+            if assume_yes == True:
+                return True
+            else:
+                print_buttons()
+                answer = Confirm.ask("是否一键下载？")
+                return answer
 
 
 def get_novel_item(id, response):

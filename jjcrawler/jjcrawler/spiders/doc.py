@@ -31,9 +31,6 @@ def create_desc_doc(directory: Path, novel):
     tags_paragraph = description_doc.add_paragraph(tags)
     tags_paragraph.runs[0].font.color.rgb = RGBColor(0xFF, 0x00, 0x00)
 
-    keywords_paragraph = description_doc.add_paragraph(novel["keywords"])
-    keywords_paragraph.runs[0].font.color.rgb = RGBColor(0x00, 0x00, 0xFF)
-
     oneliner_paragraph = description_doc.add_paragraph(novel["oneliner"])
     oneliner_paragraph.runs[0].font.color.rgb = RGBColor(0xF9, 0x8C, 0x4D)
 

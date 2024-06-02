@@ -20,19 +20,20 @@ from .config import format
 class NovelSpider(scrapy.Spider):
     name = "novel"
 
-    def __init__(self, id=None, *args, **kwargs):
+    def __init__(self, id=None, yes=False, *args, **kwargs):
         set_log_level()
         super(NovelSpider, self).__init__(*args, **kwargs)
 
         self.allowed_domains = ["www.jjwxc.net"]
         self.start_urls = [f"https://www.jjwxc.net/onebook.php?novelid={id}"]
         self.id = str(id)
+        self.assume_yes = yes == "True" and True or False
         self.parsed = False
         self.downloaded = False
 
     def parse(self, response):
         self.parsed = True
-        download = novel_preview(self.id, response)
+        download = novel_preview(self.id, response, self.assume_yes)
         if not download:
             return
 
@@ -79,9 +80,8 @@ class NovelSpider(scrapy.Spider):
         else:
             novel["desc"] = process_desc(response.xpath('//*[@id="novelintro"]/node()'))
             novel["tag_list"] = response.css("div.smallreadbody span a::text").getall()
-            novel["keywords"] = response.css("span.bluetext::text").get()
-            novel["oneliner"] = smallreadbody[2].get()
-            novel["meaning"] = smallreadbody[3].get().strip()
+            novel["oneliner"] = smallreadbody[-2].get()
+            novel["meaning"] = smallreadbody[-1].get().strip()
         return novel
 
     def parse_chapter(self, response):
