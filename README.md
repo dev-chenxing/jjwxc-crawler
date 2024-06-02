@@ -59,6 +59,13 @@ python -m venv venv   # 创建名为venv的Python虚拟环境
 venv\Scripts\activate # Windows系统下激活虚拟环境venv
 ```
 
+在Linux系统下，
+
+```bash
+chmod +x venv/bin/activate 
+source venv/bin/activate 
+```
+
 此时命令行前应显示有`(venv)`，表示当前已激活虚拟环境`venv`
 
 第二步，在虚拟环境内安装 Scrapy 和其他依赖

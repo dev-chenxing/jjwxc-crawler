@@ -54,7 +54,14 @@ Assuming you now have Python installed, first, open a terminal in the root direc
 
 ```powershell
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate # on Windows
+```
+
+If you're on Linux,
+
+```bash
+chmod +x venv/bin/activate 
+source venv/bin/activate 
 ```
 
 Second, install Scrapy and other dependencies within the virtual environment, so make sure your `venv` virtual environment is activated.
