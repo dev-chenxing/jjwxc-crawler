@@ -53,7 +53,7 @@ def download_cover(directory: Path, novel):
 
 
 def get_chapter_id(url: str) -> str:
-    ids = re.findall("\d+", url)
+    ids = re.findall(r"\d+", url)
     if len(ids) == 1:
         chapter_id = None
     else:

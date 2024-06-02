@@ -67,7 +67,7 @@ def get_novel_item(id, response):
         novel["error"] = "文案内容需作者填写身份信息后方能展示。"
     else:
         novel["tags"] = get_tags(response)
-        novel["oneliner"] = smallreadbody[2].get().split("：")[1]
+        novel["oneliner"] = smallreadbody[-2].get().split("：")[1]
     novel["author"] = get_author(response)
     novel["genre"] = response.css("li span::text")[1].get().strip()
     novel["word_count"] = get_word_count(response)
