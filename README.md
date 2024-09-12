@@ -96,4 +96,9 @@ scrapy crawl novel -a id=1
 format = "txt"
 ```
 
+下载一整页的小说
+```bash
+scrapy crawl novelist
+```
+
 **[⬆ 回到顶部](#特点功能)**
