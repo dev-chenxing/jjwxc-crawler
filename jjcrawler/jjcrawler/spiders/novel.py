@@ -64,7 +64,8 @@ class NovelSpider(scrapy.Spider):
         novel["title"] = get_novel_title(response)
         if novel["title"] == None:
             return
-        novel["cover_url"] = response.css("img.noveldefaultimage::attr(src)").get()
+        novel["cover_url"] = response.css(
+            "img.noveldefaultimage::attr(src)").get()
         page_title = response.css("title::text").get()
         if re.findall("小树苗", page_title) != []:
             return get_children_novel_item(self.id, novel["title"], response)
@@ -78,8 +79,10 @@ class NovelSpider(scrapy.Spider):
                 novel["meaning"],
             ) = (None, None, None, None)
         else:
-            novel["desc"] = process_desc(response.xpath('//*[@id="novelintro"]/node()'))
-            novel["tag_list"] = response.css("div.smallreadbody span a::text").getall()
+            novel["desc"] = process_desc(
+                response.xpath('//*[@id="novelintro"]/node()'))
+            novel["tag_list"] = response.css(
+                "div.smallreadbody span a::text").getall()
             novel["oneliner"] = smallreadbody[-2].get()
             novel["meaning"] = smallreadbody[-1].get().strip()
         return novel
@@ -123,7 +126,8 @@ def get_children_novel_item(id, title, response):
     novel["title"] = title
     novel_meta = response.css("div.novelmeta_item_div span::text")
     novel["desc"] = process_desc(
-        response.xpath("//div[@class='novelmeta_item_div']/span")[10].css("*").getall()
+        response.xpath(
+            "//div[@class='novelmeta_item_div']/span")[10].css("*").getall()
     )
     novel["tag_list"] = response.css("span span a::text").getall()
     novel["keywords"] = novel_meta[-6].get() + novel_meta[-5].get()

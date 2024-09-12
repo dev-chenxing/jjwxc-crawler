@@ -23,9 +23,9 @@ def create_desc_txt(directory: Path, novel):
     description_txt.close()
 
 
-def create_chapter_txt(directory: Path, chapter):
+def create_chapter_txt(directory: Path, title, chapter):
     file_name = get_file_name(chapter)
-    print(f"下载 {file_name} 中...")
+    print(f"下载 {title} {file_name} 中...")
 
     output_path = directory / f"{file_name}.txt"
     chapter_txt = open(output_path, "w", encoding="utf-8")
@@ -36,10 +36,11 @@ def create_chapter_txt(directory: Path, chapter):
     for paragraph in format_body(chapter["body"]):
         chapter_txt.write(paragraph + "\n")
 
-    author_said = chapter["author_said"]
-    if author_said:
-        chapter_txt.write("\n")
-        for author_said_p in author_said:
-            chapter_txt.write(author_said_p + "\n")
+    if "author_said" in chapter:
+        author_said = chapter["author_said"]
+        if author_said:
+            chapter_txt.write("\n")
+            for author_said_p in author_said:
+                chapter_txt.write(author_said_p + "\n")
 
     chapter_txt.close()
