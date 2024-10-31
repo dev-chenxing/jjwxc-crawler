@@ -41,10 +41,10 @@ def create_desc_doc(directory: Path, novel):
     description_doc.save(output_path)
 
 
-def create_chapter_doc(directory: Path, title, chapter):
+def create_chapter_doc(directory: Path, chapter):
     chapter_doc = Document()
     file_name = get_file_name(chapter)
-    print(f"下载 {title} {file_name} 中...")
+    print(f"下载 {chapter["title"]} {file_name} 中...")
 
     set_doc_style(chapter_doc)
 

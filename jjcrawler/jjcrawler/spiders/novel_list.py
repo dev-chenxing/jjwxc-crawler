@@ -8,14 +8,15 @@ from .txt import create_chapter_txt
 class NovelListSpider(scrapy.Spider):
     name = "novellist"
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, xx, bq, sd=None, *args, **kwargs):
         set_log_level()
         super(NovelListSpider, self).__init__(*args, **kwargs)
 
         self.allowed_domains = ["www.jjwxc.net"]
-        page = 1
+        sd_text = "&".join(
+            [f"sd{x}={x}" for x in sd.split(",")]) + "&" if sd else ""
         self.start_urls = [
-            f"https://www.jjwxc.net/bookbase.php?xx=3&bq=68&page={page}"]
+            f"https://www.jjwxc.net/bookbase.php?xx{xx}={xx}&bq={bq}&{sd_text}page={i}" for i in range(1, 11)]
 
     def parse(self, response: Response):
         novel_list = response.css("tr")
@@ -55,10 +56,9 @@ class NovelListSpider(scrapy.Spider):
             novel["desc"] = response.css("div.smallreadbody::text").getall()
             (
                 novel["tag_list"],
-                novel["keywords"],
                 novel["oneliner"],
                 novel["meaning"],
-            ) = (None, None, None, None)
+            ) = (None, None, None)
         else:
             novel["tag_list"] = response.css(
                 "div.smallreadbody span a::text").getall()

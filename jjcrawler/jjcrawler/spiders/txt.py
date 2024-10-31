@@ -11,10 +11,10 @@ def create_desc_txt(directory: Path, novel):
     for paragraph in novel["desc"]:
         description_txt.write(paragraph + "\n")
 
+    description_txt.write("\n")
+
     tags = "内容标签： " + " ".join(novel["tag_list"])
     description_txt.write(tags + "\n")
-
-    description_txt.write(novel["keywords"] + "\n")
 
     description_txt.write(novel["oneliner"] + "\n")
 
@@ -23,9 +23,9 @@ def create_desc_txt(directory: Path, novel):
     description_txt.close()
 
 
-def create_chapter_txt(directory: Path, title, chapter):
+def create_chapter_txt(directory: Path, chapter):
     file_name = get_file_name(chapter)
-    print(f"下载 {title} {file_name} 中...")
+    print(f"下载 {chapter["title"]} {file_name} 中...")
 
     output_path = directory / f"{file_name}.txt"
     chapter_txt = open(output_path, "w", encoding="utf-8")

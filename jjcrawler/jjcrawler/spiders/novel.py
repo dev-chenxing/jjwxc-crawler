@@ -74,10 +74,9 @@ class NovelSpider(scrapy.Spider):
             novel["desc"] = response.css("div.smallreadbody::text").getall()
             (
                 novel["tag_list"],
-                novel["keywords"],
                 novel["oneliner"],
                 novel["meaning"],
-            ) = (None, None, None, None)
+            ) = (None, None, None)
         else:
             novel["desc"] = process_desc(
                 response.xpath('//*[@id="novelintro"]/node()'))
@@ -130,7 +129,6 @@ def get_children_novel_item(id, title, response):
             "//div[@class='novelmeta_item_div']/span")[10].css("*").getall()
     )
     novel["tag_list"] = response.css("span span a::text").getall()
-    novel["keywords"] = novel_meta[-6].get() + novel_meta[-5].get()
     novel["oneliner"] = novel_meta[-4].get() + novel_meta[-3].get()
     novel["meaning"] = novel_meta[-2].get() + novel_meta[-1].get()
     return novel
