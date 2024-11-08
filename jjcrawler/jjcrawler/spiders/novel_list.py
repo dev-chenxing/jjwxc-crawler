@@ -1,14 +1,14 @@
 import re
 from scrapy.http import Response
 import scrapy
-from .utils import set_log_level, get_chapter_id, get_novel_title, make_directories
-from .txt import create_chapter_txt
+from .utils import process_desc, set_log_level, get_chapter_id, get_novel_title, make_directories
+from .txt import create_chapter_txt, create_desc_txt
 
 
 class NovelListSpider(scrapy.Spider):
     name = "novellist"
 
-    def __init__(self, xx, bq, sd=None, *args, **kwargs):
+    def __init__(self, xx, bq=-1, sd=None, *args, **kwargs):
         set_log_level()
         super(NovelListSpider, self).__init__(*args, **kwargs)
 
@@ -29,6 +29,7 @@ class NovelListSpider(scrapy.Spider):
     def parse_novel(self, response: Response):
         novel = self.get_novel_item(response)
         directory = make_directories(novel)
+        create_desc_txt(directory, novel)
 
         chapters = response.css("span div a")
         if chapters == []:
@@ -60,6 +61,8 @@ class NovelListSpider(scrapy.Spider):
                 novel["meaning"],
             ) = (None, None, None)
         else:
+            novel["desc"] = process_desc(
+                response.xpath('//*[@id="novelintro"]/node()'))
             novel["tag_list"] = response.css(
                 "div.smallreadbody span a::text").getall()
             novel["oneliner"] = smallreadbody[-2].get()

@@ -23,9 +23,9 @@ def create_desc_txt(directory: Path, novel):
     description_txt.close()
 
 
-def create_chapter_txt(directory: Path, chapter):
+def create_chapter_txt(directory: Path, novel_title, chapter):
     file_name = get_file_name(chapter)
-    print(f"下载 {chapter["title"]} {file_name} 中...")
+    print(f"下载 {novel_title} {file_name} 中...")
 
     output_path = directory / f"{file_name}.txt"
     chapter_txt = open(output_path, "w", encoding="utf-8")

@@ -83,8 +83,8 @@ cd jjcrawler
 # 运行爬虫命令，其中ID为书号
 scrapy crawl novel -a id=ID
 
-# 例如，我要下载书号为1的测试文，则运行以下命令行
-scrapy crawl novel -a id=1
+# 例如，我要下载书号为2的测试文，则运行以下命令行
+scrapy crawl novel -a id=2
 ```
 
 下载章节将保存至根目录下的 novels 文件夹
@@ -97,8 +97,9 @@ format = "txt"
 ```
 
 下载一整页的小说
+
 ```bash
-scrapy crawl novelist
+scrapy crawl novellist -a xx=3 -a sd=4 -a bq=39,45,124,313,314
 ```
 
 **[⬆ 回到顶部](#特点功能)**

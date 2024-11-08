@@ -49,12 +49,12 @@ class NovelSpider(scrapy.Spider):
 
         chapters = response.css("span div a")
         if chapters == []:
-            yield response.follow(response.url, callback=self.parse_chapter)
+            yield response.follow(response.url, callback=self.parse_chapter, meta={"title": novel["title"]})
         else:
             for chapter in chapters:
                 try:
                     url = chapter.attrib["href"]
-                    yield response.follow(url, callback=self.parse_chapter)
+                    yield response.follow(url, callback=self.parse_chapter, meta={"title": novel["title"]})
                 except:
                     continue
 
@@ -97,9 +97,9 @@ class NovelSpider(scrapy.Spider):
         ).getall()
         chapter["author_said"] = process_desc(response.css("div.readsmall"))
         if format == "docx":
-            create_chapter_doc(self.directory, chapter)
+            create_chapter_doc(self.directory, response.meta["title"], chapter)
         elif format == "txt":
-            create_chapter_txt(self.directory, chapter)
+            create_chapter_txt(self.directory, response.meta["title"], chapter)
 
     def close(self, spider):
         if not self.parsed:

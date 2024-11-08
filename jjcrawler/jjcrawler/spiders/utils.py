@@ -15,7 +15,8 @@ def process_desc(desc_selector_list):
     desc_list = []
     first_line_break = False
     for selector in desc_selector_list:
-        children = selector.xpath("child::node()")
+        if (selector.type != "json"):
+            children = selector.xpath("child::node()")
         if children != []:
             desc_list += children.getall()
         else:
@@ -89,7 +90,8 @@ def get_novel_title(response):
 
 def num2chn(number_string):
     number = int(number_string)
-    number_string = str(round(number, -2))[: len(number_string) - 2].rjust(2, "0")
+    number_string = str(
+        round(number, -2))[: len(number_string) - 2].rjust(2, "0")
     integer = number_string[:-2] or "0"
     decimal = number_string[-2:].rstrip("0")
     decimal = f".{decimal}" if decimal else ""
@@ -99,7 +101,8 @@ def num2chn(number_string):
 def get_second_row(novel):
     left = novel["author"]
     right = f"{num2chn(novel['word_count'])}·{novel['status']}"
-    center = "".rjust(45 - len(left.encode("gbk")) - len(right.encode("gbk")), " ")
+    center = "".rjust(45 - len(left.encode("gbk")) -
+                      len(right.encode("gbk")), " ")
     return f"{left}{center}{right}"
 
 
