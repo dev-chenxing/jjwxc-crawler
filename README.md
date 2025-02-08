@@ -99,7 +99,10 @@ format = "txt"
 下载一整页的小说
 
 ```bash
-scrapy crawl novellist -a xx=3 -a sd=4 -a bq=39,45,124,313,314
+# 无CP-女主视角-仙侠修真标签
+scrapy crawl novellist -a xx=5 -a mainview=2 -a bq=68
+# 无CP-女主视角-古色古香-仙侠类型
+scrapy crawl novellist -a xx=5 -a mainview=2 -a sd=2 -a lx=4
 ```
 
 **[⬆ 回到顶部](#特点功能)**

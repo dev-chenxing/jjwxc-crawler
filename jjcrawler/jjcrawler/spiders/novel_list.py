@@ -8,7 +8,7 @@ from .txt import create_chapter_txt, create_desc_txt
 class NovelListSpider(scrapy.Spider):
     name = "novellist"
 
-    def __init__(self, xx, bq=-1, sd=None, *args, **kwargs):
+    def __init__(self, xx, bq=-1, mainview=None, sd=None, *args, **kwargs):
         set_log_level()
         super(NovelListSpider, self).__init__(*args, **kwargs)
 
@@ -16,7 +16,7 @@ class NovelListSpider(scrapy.Spider):
         sd_text = "&".join(
             [f"sd{x}={x}" for x in sd.split(",")]) + "&" if sd else ""
         self.start_urls = [
-            f"https://www.jjwxc.net/bookbase.php?xx{xx}={xx}&bq={bq}&{sd_text}page={i}" for i in range(1, 11)]
+            f"https://www.jjwxc.net/bookbase.php?xx{xx}={xx}&mainview={mainview}&bq={bq}&{sd_text}page={i}" for i in range(1, 11)]
 
     def parse(self, response: Response):
         novel_list = response.css("tr")
