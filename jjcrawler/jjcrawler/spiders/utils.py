@@ -69,8 +69,11 @@ def make_directories(novel) -> Path:
     return directory
 
 
-def get_novel_title(response):
-    title = response.css("h1 span::text").get()
+def get_novel_title(response, is_mobile_pages):
+    if is_mobile_pages:
+        title = response.css("h2 *::text")[3].get().strip()[1:]
+    else:
+        title = response.css("h1 span::text").get()
     if title:
         if "*" in title:
             new_title = ""
