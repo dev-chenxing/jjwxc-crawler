@@ -103,6 +103,10 @@ format = "txt"
 scrapy crawl novellist -a xx=5 -a mainview=2 -a bq=68
 # 无CP-女主视角-古色古香-仙侠类型
 scrapy crawl novellist -a xx=5 -a mainview=2 -a sd=2 -a lx=4
+# 衍生-百合-武侠
+scrapy crawl novellist -a yc=2 -a xx=3 -a bq=11
+# 标题含有"神雕"的百合小说 (Experiental option, still in development)
+scrapy crawl novellist -a title=神雕 -a xx=3
 ```
 
 **[⬆ 回到顶部](#特点功能)**
