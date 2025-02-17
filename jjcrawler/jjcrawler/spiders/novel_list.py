@@ -31,6 +31,7 @@ class NovelListSpider(scrapy.Spider):
                 f"https://m.jjwxc.net/search/index/page/{i}?{kw}" for i in range(1, 10)]
             self.mobile_pages = True
         else:
+            self.mobile_pages = False
             self.allowed_domains = ["www.jjwxc.net"]
             sd_text = "&".join(
                 [f"sd{x}={x}" for x in sd.split(",")]) + "&" if sd else ""

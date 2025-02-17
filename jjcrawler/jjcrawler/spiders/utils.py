@@ -15,8 +15,8 @@ def process_desc(desc_selector_list):
     desc_list = []
     first_line_break = False
     for selector in desc_selector_list:
-        if (selector.type != "json"):
-            children = selector.xpath("child::node()")
+        children = selector.xpath(
+            "child::node()") if selector.type != "json" else []
         if children != []:
             desc_list += children.getall()
         else:

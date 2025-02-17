@@ -25,6 +25,7 @@ def create_desc_txt(directory: Path, novel):
 
 def create_chapter_txt(directory: Path, novel_title, chapter):
     file_name = get_file_name(chapter)
+    file_name = file_name.replace('\t', '')
     print(f"下载 {novel_title} {file_name} 中...")
 
     output_path = directory / f"{file_name}.txt"
