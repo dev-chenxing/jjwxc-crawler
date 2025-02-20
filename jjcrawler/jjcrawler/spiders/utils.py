@@ -73,7 +73,7 @@ def get_novel_title(response, is_mobile_pages):
     if is_mobile_pages:
         title = response.css("h2 *::text")[3].get().strip()[1:]
     else:
-        title = response.css("h1 span::text").get()
+        title = response.css("h1 span").css("::text").get()
     if title:
         if "*" in title:
             new_title = ""
@@ -88,6 +88,9 @@ def get_novel_title(response, is_mobile_pages):
                     if asterisk == False:
                         asterisk = True
             title = new_title
+        title = title.replace("/", "")
+        title = title.replace("<", "")
+        title = title.replace(">", "")
         return title.strip()
 
 
