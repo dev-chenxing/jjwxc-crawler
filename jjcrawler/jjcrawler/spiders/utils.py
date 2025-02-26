@@ -28,7 +28,7 @@ def process_desc(desc_selector_list):
                 first_line_break = True
             else:
                 desc.append("")
-        elif line[:3] == "<hr":
+        elif re.match("^<embed|<hr", line):
             continue
         else:
             desc.append(line)
@@ -253,3 +253,8 @@ def isEmpty(line: str):
 
 def left_indent(line):
     return "\u3000\u3000" + line
+
+
+reset = "\033[0m"
+green = '\033[32m'
+dark_gray = '\033[90m'

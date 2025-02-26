@@ -2,8 +2,9 @@ from pathlib import Path
 from .utils import get_file_name, get_heading, format_body
 
 
-def create_desc_txt(directory: Path, novel):
-    print("下载 文案 中...")
+def create_desc_txt(directory: Path, novel, quiet=False):
+    if not quiet:
+        print(f"下载 {novel["title"]} 文案 中...")
     file_name = "文案"
     output_path = directory / f"{file_name}.txt"
     description_txt = open(output_path, "w", encoding="utf-8")
@@ -23,10 +24,11 @@ def create_desc_txt(directory: Path, novel):
     description_txt.close()
 
 
-def create_chapter_txt(directory: Path, novel_title, chapter):
+def create_chapter_txt(directory: Path, novel_title, chapter, quiet=False):
     file_name = get_file_name(chapter)
     file_name = file_name.replace('\t', '')
-    print(f"下载 {novel_title} {file_name} 中...")
+    if not quiet:
+        print(f"下载 {novel_title} {file_name} 中...")
 
     output_path = directory / f"{file_name}.txt"
     chapter_txt = open(output_path, "w", encoding="utf-8")

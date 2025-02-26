@@ -28,7 +28,7 @@ class NovelListSpider(scrapy.Spider):
             self.allowed_domains = ["m.jjwxc.net"]
             kw = urllib.parse.urlencode({"kw": title}, encoding="gb18030")
             self.start_urls = [
-                f"https://m.jjwxc.net/search/index/page/{i}?{kw}" for i in range(1, 10)]
+                f"https://m.jjwxc.net/search/index/page/{i}?{kw}" for i in range(1, 11)]
             self.mobile_pages = True
         else:
             self.mobile_pages = False
