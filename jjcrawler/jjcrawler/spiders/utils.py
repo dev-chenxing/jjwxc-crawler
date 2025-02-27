@@ -28,7 +28,7 @@ def process_desc(desc_selector_list):
                 first_line_break = True
             else:
                 desc.append("")
-        elif re.match("^<embed|<hr", line):
+        elif re.match("^<embed|<hr|<input", line):
             continue
         else:
             desc.append(line)
